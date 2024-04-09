@@ -1,28 +1,37 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import ToDoList from './components/ToDoList.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logoCheckMark.png" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div id="app" class="container">
+      <img alt="Vue logo" class="logo" src="@/assets/logoCheckMark.png" width="125" height="125" />
+      <ToDoList />
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
-<style scoped>
+<style>
 
 * {
   box-sizing: border-box;
 }
 
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
+  font-size: 24px;
+}
+
 .logo {
   display: block;
-  margin: 0 auto;
+  margin: 5px auto;
 }
 
 </style>
