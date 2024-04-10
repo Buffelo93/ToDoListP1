@@ -3,7 +3,7 @@
         <div class="add-button-container">
             <button class="button" @click="addTodo">Add ToDo Item</button>
         </div>
-        <div class="your-class">
+        <div class="user-inputs">
             <input type="text" class="todo-input" placeholder="What's the next task?" v-model="newTodo"
                 @keyup.enter="addTodo" maxlength="25">
             <input type="text" class="todo-input" placeholder="Add a note..." v-model="newNote" @keyup.enter="addTodo" maxlength="100">
@@ -141,10 +141,11 @@ export default {
 <style lang="scss">
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
-.your-class input {
+.user-inputs input {
     display: block;
     display: flex;
     flex-direction: row;
+    margin-bottom: 16px;
 }
 
 .todo-input {
@@ -194,7 +195,6 @@ export default {
 
 .todo-item-label {
     padding: 10px;
-    border: 1px solid white;
     margin-left: 12px;
     max-width: 400px;
     word-wrap: break-word;
@@ -212,7 +212,6 @@ export default {
     margin-left: 12px;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 
     &:focus {
