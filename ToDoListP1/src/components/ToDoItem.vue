@@ -1,14 +1,18 @@
 <template>
     <div class="todo-item">
         <div class="todo-item-left">
-            <input type="checkbox" v-model="isCompleted" @change="doneEdit">
+            <input type="checkbox" v-model="isCompleted">
             <div v-if="note.trim().length == 0" @dblclick="editTitle" class="todo-item-label"
                 :class="{ isCompleted: isCompleted }">{{ title }}</div>
-            <div v-else class="todo-item-label"
-                :class="{ isCompleted: isCompleted }">{{ title }} - {{ note }}</div>
+            <div v-else class="todo-item-label" :class="{ isCompleted: isCompleted }">{{ title }} - {{ note }}</div>
         </div>
-        <div class="remove-item" @click="removeTodo(todo.id)">
-            &times;
+        <div class="todo-item-right">
+            <div class="deadline">
+                {{ formatDate(deadLineDateTime) }}
+            </div>
+            <div class="remove-item" @click="removeTodo(todo.id)">
+                &times;
+            </div>
         </div>
     </div>
 </template>
@@ -32,6 +36,7 @@ export default {
             'title': this.todo.title,
             'note': this.todo.note,
             'isCompleted': this.todo.isCompleted,
+            'deadLineDateTime': this.todo.deadLineDateTime,
         }
     },
     watch: {
@@ -43,20 +48,10 @@ export default {
         removeTodo(id) {
             this.$emit('removedTodo', id)
         },
-        doneEdit() {
-            if (this.title.trim() == '') {
-                this.title = this.beforeEditCache
-            }
-            this.editingTitle = false
-            this.editingNote = false
-            this.$emit('finishedEdit', {
-                'id': this.id,
-                'title': this.title,
-                'isCompleted': this.isCompleted,
-                'editingTitle': this.editingTitle,
-                'editingNote': this.editingNote,
-            })
-
+        formatDate(dateString) {
+            const date = new Date(dateString);
+            // Then specify how you want your dates to be formatted
+            return new Intl.DateTimeFormat('default', { dateStyle: 'long' }).format(date);
         },
     }
 }

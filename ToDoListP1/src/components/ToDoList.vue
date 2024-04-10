@@ -1,8 +1,13 @@
 <template>
     <div>
+        <div class="add-button-container">
+            <button class="button" @click="addTodo">Add ToDo Item</button>
+        </div>
         <div class="your-class">
-            <input type="text" class="todo-input" placeholder="What's the next task?" v-model="newTodo" @keyup.enter="addTodo">
-            <input type="text" class="todo-input" placeholder="Add a note..." v-model="newNote" @keyup.enter="addTodo">
+            <input type="text" class="todo-input" placeholder="What's the next task?" v-model="newTodo"
+                @keyup.enter="addTodo" maxlength="25">
+            <input type="text" class="todo-input" placeholder="Add a note..." v-model="newNote" @keyup.enter="addTodo" maxlength="100">
+            <Datepicker v-model="newDeadLineDateTime" />
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
             <todo-item v-for="todo in todosFiltered" :key="todo.id" :todo="todo" :checkAll="!anyRemaining"
@@ -17,16 +22,17 @@
 
         <div class="extra-container">
             <div class="button-container">
-                <button :class="{ active: filter == 'all' }" @click="filter = 'all'">All</button>
-                <button :class="{ active: filter == 'active' }" @click="filter = 'active'">Active</button>
-                <button :class="{ active: filter == 'completed' }" @click="filter = 'completed'">Completed</button>
+                <button class="button" :class="{ active: filter == 'all' }" @click="filter = 'all'">All</button>
+                <button class="button" :class="{ active: filter == 'active' }" @click="filter = 'active'">Active</button>
+                <button class="button" :class="{ active: filter == 'completed' }"
+                    @click="filter = 'completed'">Completed</button>
             </div>
         </div>
 
         <div v-if="showClearCompletedButton" class="extra-container">
             <div class="button-container">
                 <transition name="fade">
-                    <button @click="clearCompleted">Clear Completed</button>
+                    <button class="button" @click="clearCompleted">Clear Completed</button>
                 </transition>
             </div>
         </div>
@@ -36,16 +42,20 @@
   
 <script>
 import TodoItem from './ToDoItem.vue'
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
     name: 'todo-list',
     components: {
         TodoItem,
+        Datepicker,
     },
     data() {
         return {
             newTodo: '',
             newNote: '',
+            newDeadLineDateTime: Date(),
             idForTodo: 3,
             filter: 'all',
             todos: [
@@ -54,12 +64,14 @@ export default {
                     'title': 'Make a list',
                     'note': 'Put list here',
                     'isCompleted': false,
+                    'deadLineDateTime': Date(),
                 },
                 {
                     'id': 2,
                     'title': 'Make a good app',
                     'note': 'Good app goes here',
                     'isCompleted': false,
+                    'deadLineDateTime': Date(2024, 6, 24),
                 },
             ]
         }
@@ -92,15 +104,20 @@ export default {
                 return
             }
 
+            console.log("FOFO")
+            console.log(this.newDeadLineDateTime)
+
             this.todos.push({
                 id: this.idForTodo,
                 title: this.newTodo,
                 note: this.newNote,
                 isCompleted: false,
+                deadLineDateTime: this.newDeadLineDateTime,
             })
 
             this.newTodo = ''
             this.newNote = ''
+            this.newDeadLineDateTime = Date()
             this.idForTodo++
         },
         removeTodo(id) {
@@ -124,7 +141,7 @@ export default {
 <style lang="scss">
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
-.your-class input{
+.your-class input {
     display: block;
     display: flex;
     flex-direction: row;
@@ -149,10 +166,21 @@ export default {
     animation-duration: 0.3s;
 }
 
+.todo-item-right {
+    display: flex;
+    align-items: center;
+}
+
+.deadline {
+    font-size: small;
+    font-style: italic;
+}
+
 .remove-item {
     cursor: pointer;
-    margin-left: 14px;
-
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
     &:hover {
         color: black;
     }
@@ -211,6 +239,15 @@ export default {
     padding-top: 14px;
     margin-bottom: 14px;
     margin: auto;
+}
+
+.add-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding-top: 14px;
+    margin-bottom: 14px; 
 }
 
 .button {
