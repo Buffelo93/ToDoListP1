@@ -163,6 +163,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0 auto;
     animation-duration: 0.3s;
 }
 
@@ -195,6 +196,8 @@ export default {
     padding: 10px;
     border: 1px solid white;
     margin-left: 12px;
+    max-width: 400px;
+    word-wrap: break-word;
 }
 
 .todo-note-label {
