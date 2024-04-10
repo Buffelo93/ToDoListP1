@@ -1,75 +1,63 @@
 <template>
     <div class="todo-item">
-      <div class="todo-item-left">
-          <input type="checkbox" v-model="completed" @change="doneEdit">
-          <div v-if="!editing" @dblclick="editTodo" class="todo-item-label" :class="{ completed : completed }">{{ title }}</div>
-          <input v-else class="todo-item-edit" type="text" v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" v-focus>
+        <div class="todo-item-left">
+            <input type="checkbox" v-model="isCompleted" @change="doneEdit">
+            <div v-if="note.trim().length == 0" @dblclick="editTitle" class="todo-item-label"
+                :class="{ isCompleted: isCompleted }">{{ title }}</div>
+            <div v-else class="todo-item-label"
+                :class="{ isCompleted: isCompleted }">{{ title }} - {{ note }}</div>
         </div>
         <div class="remove-item" @click="removeTodo(todo.id)">
-          &times;
+            &times;
         </div>
     </div>
-  </template>
+</template>
   
-  <script>
-  export default {
+<script>
+export default {
     name: 'todo-item',
     props: {
-      todo: {
-        type: Object,
-        required: true,
-      },
-      checkAll: {
-        type: Boolean,
-        required: true,
-      }
+        todo: {
+            type: Object,
+            required: true,
+        },
+        checkAll: {
+            type: Boolean,
+            required: true,
+        }
     },
     data() {
-      return {
-        'id': this.todo.id,
-        'title': this.todo.title,
-        'completed': this.todo.completed,
-        'editing': this.todo.editing,
-        'beforeEditCache': '',
-      }
+        return {
+            'id': this.todo.id,
+            'title': this.todo.title,
+            'note': this.todo.note,
+            'isCompleted': this.todo.isCompleted,
+        }
     },
     watch: {
-      checkAll() {
-        this.completed = this.checkAll ? true : this.todo.completed
-      }
-    },
-    directives: {
-      focus: {
-        inserted: function (el) {
-          el.focus()
+        checkAll() {
+            this.isCompleted = this.checkAll ? true : this.todo.isCompleted
         }
-      }
     },
     methods: {
-      removeTodo(id) {
-        this.$emit('removedTodo', id)
-      },
-      editTodo() {
-        this.beforeEditCache = this.title
-        this.editing = true
-      },
-      doneEdit() {
-        if (this.title.trim() == '') {
-          this.title = this.beforeEditCache
-        }
-        this.editing = false
-        this.$emit('finishedEdit', {
-          'id': this.id,
-          'title': this.title,
-          'completed': this.completed,
-          'editing': this.editing,
-        })
-  
-      },
-      cancelEdit() {
-        this.title = this.beforeEditCache
-        this.editing = false
-      },
+        removeTodo(id) {
+            this.$emit('removedTodo', id)
+        },
+        doneEdit() {
+            if (this.title.trim() == '') {
+                this.title = this.beforeEditCache
+            }
+            this.editingTitle = false
+            this.editingNote = false
+            this.$emit('finishedEdit', {
+                'id': this.id,
+                'title': this.title,
+                'isCompleted': this.isCompleted,
+                'editingTitle': this.editingTitle,
+                'editingNote': this.editingNote,
+            })
+
+        },
     }
-  }
-  </script>
+}
+</script>

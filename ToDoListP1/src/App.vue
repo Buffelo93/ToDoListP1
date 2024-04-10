@@ -24,7 +24,7 @@ import ToDoList from './components/ToDoList.vue'
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #275a8d;
   margin-top: 60px;
   font-size: 24px;
 }
