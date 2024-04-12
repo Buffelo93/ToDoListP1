@@ -190,30 +190,6 @@ export default {
     word-wrap: break-word;
 }
 
-.todo-note-label {
-    padding: 5px;
-    border: 1px solid white;
-    margin-left: 1px;
-}
-
-.todo-item-edit {
-    font-size: 24px;
-    color: #2c3e50;
-    margin-left: 12px;
-    width: 100%;
-    padding: 10px;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-
-    &:focus {
-        outline: none;
-    }
-}
-
-.completed {
-    text-decoration: line-through;
-    color: grey;
-}
-
 .extra-container {
     display: flex;
     align-items: center;
