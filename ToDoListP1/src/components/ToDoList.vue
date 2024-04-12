@@ -12,14 +12,9 @@
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
             <todo-item v-for="todo in todosFiltered" :key="todo.ToDoId" :todo="todo" :checkAll="!anyRemaining"
-                @removedTodo="removeTodo" @finishedEdit="finishedEdit">
+                @removedTodo="removeTodo" @checkChanged="checkChanged">
             </todo-item>
         </transition-group>
-
-        <div class="extra-container">
-            <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos"> Check All</label></div>
-            <div>{{ remaining }} items left</div>
-        </div>
 
         <div class="extra-container">
             <div class="button-container">
@@ -30,15 +25,6 @@
                     @click="filter = 'completed'">Completed</button>
             </div>
         </div>
-
-        <div v-if="showClearCompletedButton" class="extra-container">
-            <div class="button-container">
-                <transition name="fade">
-                    <button class="button" @click="clearCompleted">Clear Completed</button>
-                </transition>
-            </div>
-        </div>
-
     </div>
 </template>
 
@@ -61,6 +47,7 @@ export default {
             newNote: null,
             newDeadLine: null,
             filter: 'all',
+            checkAll: false,
             todos: []
         }
     },
@@ -81,9 +68,6 @@ export default {
             }
 
             return this.todos
-        },
-        showClearCompletedButton() {
-            return this.todos.filter(todo => todo.IsComplete).length > 0
         }
     },
     methods: {
@@ -116,20 +100,26 @@ export default {
                 }
             )
         },
-        removeTodo(id) {
-            const index = this.todos.findIndex((item) => item.ToDoId == id)
-            this.todos.splice(index, 1)
+        async removeTodo(id) {
+            axios.delete(API_ULR + "api/ToDo/DeleteToDoItem?toDoId=" + id)
+                .then(
+                    (response) => {
+                        console.log(response.data)
+                        const index = this.todos.findIndex((item) => item.ToDoId == id)
+                        this.todos.splice(index, 1)
+                    }
+                )
         },
-        checkAllTodos() {
-            this.todos.forEach((todo) => todo.IsComplete = event.target.checked)
-        },
-        clearCompleted() {
-            this.todos = this.todos.filter(todo => !todo.IsComplete)
-        },
-        finishedEdit(data) {
-            const index = this.todos.findIndex((item) => item.id == data.id)
-            this.todos.splice(index, 1, data)
-        },
+        async checkChanged(id, isComplete) {
+            axios.post(API_ULR + "api/ToDo/UpdateIsComplete", {
+                ToDoId: id,
+                IsComplete: isComplete
+            }).then(
+                (response) => {
+                    console.log(response.data)
+                }
+            )
+        }
     },
     mounted: function () {
         this.refreshData();
