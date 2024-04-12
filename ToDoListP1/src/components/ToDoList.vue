@@ -6,11 +6,12 @@
         <div class="user-inputs">
             <input type="text" class="todo-input" placeholder="What's the next task? (Required)" v-model="newTodo"
                 @keyup.enter="addTodo" maxlength="25">
-            <input type="text" class="todo-input" placeholder="Add a note... (Optional)" v-model="newNote" @keyup.enter="addTodo" maxlength="100">
-            <Datepicker v-model="newDeadLineDateTime" />
+            <input type="text" class="todo-input" placeholder="Add a note... (Optional)" v-model="newNote"
+                @keyup.enter="addTodo" maxlength="100">
+            <Datepicker v-model="newDeadLine" />
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-            <todo-item v-for="todo in todosFiltered" :key="todo.id" :todo="todo" :checkAll="!anyRemaining"
+            <todo-item v-for="todo in todosFiltered" :key="todo.ToDoId" :todo="todo" :checkAll="!anyRemaining"
                 @removedTodo="removeTodo" @finishedEdit="finishedEdit">
             </todo-item>
         </transition-group>
@@ -23,7 +24,8 @@
         <div class="extra-container">
             <div class="button-container">
                 <button class="button" :class="{ active: filter == 'all' }" @click="filter = 'all'">All</button>
-                <button class="button" :class="{ active: filter == 'active' }" @click="filter = 'active'">Active</button>
+                <button class="button" :class="{ active: filter == 'active' }"
+                    @click="filter = 'active'">Active</button>
                 <button class="button" :class="{ active: filter == 'completed' }"
                     @click="filter = 'completed'">Completed</button>
             </div>
@@ -39,11 +41,13 @@
 
     </div>
 </template>
-  
+
 <script>
 import TodoItem from './ToDoItem.vue'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
+const API_ULR = 'http://localhost:5135/';
 
 export default {
     name: 'todo-list',
@@ -54,31 +58,15 @@ export default {
     data() {
         return {
             newTodo: '',
-            newNote: '',
-            newDeadLineDateTime: Date(),
-            idForTodo: 3,
+            newNote: null,
+            newDeadLine: null,
             filter: 'all',
-            todos: [
-                {
-                    'id': 1,
-                    'title': 'Make a list',
-                    'note': 'Put list here',
-                    'isCompleted': false,
-                    'deadLineDateTime': Date(),
-                },
-                {
-                    'id': 2,
-                    'title': 'Make a good app',
-                    'note': 'Good app goes here',
-                    'isCompleted': false,
-                    'deadLineDateTime': Date(2024, 6, 24),
-                },
-            ]
+            todos: []
         }
     },
     computed: {
         remaining() {
-            return this.todos.filter(todo => !todo.isCompleted).length
+            return this.todos.filter(todo => !todo.IsComplete).length
         },
         anyRemaining() {
             return this.remaining != 0
@@ -87,57 +75,68 @@ export default {
             if (this.filter == 'all') {
                 return this.todos
             } else if (this.filter == 'active') {
-                return this.todos.filter(todo => !todo.isCompleted)
+                return this.todos.filter(todo => !todo.IsComplete)
             } else if (this.filter == 'completed') {
-                return this.todos.filter(todo => todo.isCompleted)
+                return this.todos.filter(todo => todo.IsComplete)
             }
 
             return this.todos
         },
         showClearCompletedButton() {
-            return this.todos.filter(todo => todo.isCompleted).length > 0
+            return this.todos.filter(todo => todo.IsComplete).length > 0
         }
     },
     methods: {
-        addTodo() {
+        async refreshData() {
+            axios.get(API_ULR + "api/ToDo/GetToDoItems").then(
+                (response) => {
+                    console.log(response.data);
+                    this.todos = response.data;
+                    this.newTodo = '';
+                    this.newNote = null;
+                    this.newDeadLine = null;
+                }
+            )
+        },
+        async addTodo() {
             if (this.newTodo.trim().length == 0) {
                 return
             }
 
-            console.log("FOFO")
-            console.log(this.newDeadLineDateTime)
-
-            this.todos.push({
-                id: this.idForTodo,
-                title: this.newTodo,
-                note: this.newNote,
-                isCompleted: false,
-                deadLineDateTime: this.newDeadLineDateTime,
-            })
-
-            this.newTodo = ''
-            this.newNote = ''
-            this.newDeadLineDateTime = Date()
-            this.idForTodo++
+            axios.post(API_ULR + "api/ToDo/AddToDoItem", {
+                ToDoId: 0,
+                Title: this.newTodo,
+                Note: this.newNote,
+                IsComplete: false,
+                DeadLine: this.newDeadLine
+            }).then(
+                (response) => {
+                    console.log(response.data);
+                    this.refreshData();
+                }
+            )
         },
         removeTodo(id) {
-            const index = this.todos.findIndex((item) => item.id == id)
+            const index = this.todos.findIndex((item) => item.ToDoId == id)
             this.todos.splice(index, 1)
         },
         checkAllTodos() {
-            this.todos.forEach((todo) => todo.isCompleted = event.target.checked)
+            this.todos.forEach((todo) => todo.IsComplete = event.target.checked)
         },
         clearCompleted() {
-            this.todos = this.todos.filter(todo => !todo.isCompleted)
+            this.todos = this.todos.filter(todo => !todo.IsComplete)
         },
         finishedEdit(data) {
             const index = this.todos.findIndex((item) => item.id == data.id)
             this.todos.splice(index, 1, data)
-        }
-    }
+        },
+    },
+    mounted: function () {
+        this.refreshData();
+    },
 }
 </script>
-  
+
 <style lang="scss">
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
@@ -183,6 +182,7 @@ export default {
     display: flex;
     align-items: center;
     margin-left: 10px;
+
     &:hover {
         color: black;
     }
@@ -249,7 +249,7 @@ export default {
     justify-content: center;
     font-size: 16px;
     padding-top: 14px;
-    margin-bottom: 14px; 
+    margin-bottom: 14px;
 }
 
 .button {

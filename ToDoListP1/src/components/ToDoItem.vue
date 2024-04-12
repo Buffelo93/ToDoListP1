@@ -1,16 +1,16 @@
 <template>
     <div class="todo-item">
         <div class="todo-item-left">
-            <input type="checkbox" v-model="isCompleted">
-            <div v-if="note.trim().length == 0" @dblclick="editTitle" class="todo-item-label"
+            <input type="checkbox" @change="updateCheck()" v-model="isCompleted">
+            <div v-if="note == null" class="todo-item-label"
                 :class="{ isCompleted: isCompleted }">{{ title }}</div>
             <div v-else class="todo-item-label" :class="{ isCompleted: isCompleted }">{{ title }} - {{ note }}</div>
         </div>
         <div class="todo-item-right">
             <div class="deadline">
-                {{ formatDate(deadLineDateTime) }}
+                {{ deadLine != null ? formatDate(deadLine) : '' }}
             </div>
-            <div class="remove-item" @click="removeTodo(todo.id)">
+            <div class="remove-item" @click="removeTodo(id)">
                 &times;
             </div>
         </div>
@@ -18,6 +18,8 @@
 </template>
   
 <script>
+const API_ULR = 'http://localhost:5135/';
+
 export default {
     name: 'todo-item',
     props: {
@@ -32,11 +34,11 @@ export default {
     },
     data() {
         return {
-            'id': this.todo.id,
-            'title': this.todo.title,
-            'note': this.todo.note,
-            'isCompleted': this.todo.isCompleted,
-            'deadLineDateTime': this.todo.deadLineDateTime,
+            'id': this.todo.ToDoId,
+            'title': this.todo.Title,
+            'note': this.todo.Note,
+            'isCompleted': this.todo.IsComplete,
+            'deadLine': this.todo.DeadLine,
         }
     },
     watch: {
@@ -45,12 +47,27 @@ export default {
         }
     },
     methods: {
-        removeTodo(id) {
-            this.$emit('removedTodo', id)
+        async removeTodo(id) {
+            axios.delete(API_ULR+"api/ToDo/DeleteToDoItem?toDoId="+id)
+            .then(
+                (response)=>{
+                    console.log(response.data);
+                    this.$emit('removedTodo', id)
+                }
+            )
+        },
+        async updateCheck() {
+            axios.post(API_ULR+"api/ToDo/UpdateIsComplete",{
+                ToDoId: this.id,
+                IsComplete: this.isCompleted
+            }).then(
+                (response)=>{
+                    console.log(response.data);
+                }
+            )
         },
         formatDate(dateString) {
             const date = new Date(dateString);
-            // Then specify how you want your dates to be formatted
             return new Intl.DateTimeFormat('default', { dateStyle: 'long' }).format(date);
         },
     }
