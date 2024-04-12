@@ -4,9 +4,9 @@
             <button class="button" @click="addTodo">Add ToDo Item</button>
         </div>
         <div class="user-inputs">
-            <input type="text" class="todo-input" placeholder="What's the next task?" v-model="newTodo"
+            <input type="text" class="todo-input" placeholder="What's the next task? (Required)" v-model="newTodo"
                 @keyup.enter="addTodo" maxlength="25">
-            <input type="text" class="todo-input" placeholder="Add a note..." v-model="newNote" @keyup.enter="addTodo" maxlength="100">
+            <input type="text" class="todo-input" placeholder="Add a note... (Optional)" v-model="newNote" @keyup.enter="addTodo" maxlength="100">
             <Datepicker v-model="newDeadLineDateTime" />
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
