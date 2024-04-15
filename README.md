@@ -2,7 +2,7 @@
 
 ## A coding project for P1
 
-![UI picture](readMePic.png)
+![readMePic](https://github.com/Buffelo93/ToDoListP1/assets/50527247/f490e286-3245-4994-bf90-df472fc8faf9)
 
 ## Setting up Frontend
 
