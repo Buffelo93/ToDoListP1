@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "Models\\POST Models\\UpdateIsComplete.cs",
               "ToolTip": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Models\\POST Models\\UpdateIsComplete.cs",
               "RelativeToolTip": "Models\\POST Models\\UpdateIsComplete.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAQAAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-12T14:34:43.922Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "Models\\ToDoItem.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T18:43:41.54Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T18:43:41.54Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "Services\\ToDoService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T18:34:23.463Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T18:34:23.463Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "Controllers\\ToDoController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T18:28:00.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T18:28:00.271Z"
             }
           ]
         }

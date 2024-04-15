@@ -11,8 +11,7 @@
             <Datepicker v-model="newDeadLine" />
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-            <todo-item v-for="todo in todosFiltered" :key="todo.ToDoId" :todo="todo" :checkAll="!anyRemaining"
-                @removedTodo="removeTodo" @checkChanged="checkChanged">
+            <todo-item v-for="todo in todosFiltered" :key="todo.ToDoId" :todo="todo" @removedTodo="removeTodo" @checkChanged="checkChanged">
             </todo-item>
         </transition-group>
 
@@ -47,7 +46,6 @@ export default {
             newNote: null,
             newDeadLine: null,
             filter: 'all',
-            checkAll: false,
             todos: []
         }
     },
