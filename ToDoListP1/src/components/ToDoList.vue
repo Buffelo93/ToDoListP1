@@ -5,9 +5,9 @@
         </div>
         <div class="user-inputs">
             <input type="text" class="todo-input" placeholder="What's the next task? (Required)" v-model="newTodo"
-                @keyup.enter="addTodo" maxlength="25">
+                @keyup.enter="addTodo">
             <input type="text" class="todo-input" placeholder="Add a note... (Optional)" v-model="newNote"
-                @keyup.enter="addTodo" maxlength="100">
+                @keyup.enter="addTodo">
             <Datepicker v-model="newDeadLine" />
         </div>
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
@@ -16,7 +16,7 @@
             </todo-item>
         </transition-group>
 
-        <div class="extra-container">
+        <div class="section-container">
             <div class="button-container">
                 <button class="button" :class="{ active: filter == 'all' }" @click="filter = 'all'">All</button>
                 <button class="button" :class="{ active: filter == 'active' }"
@@ -80,6 +80,10 @@ export default {
                     this.newNote = null;
                     this.newDeadLine = null;
                 }
+            ).catch(
+                (error) => {
+                    console.log(error)
+                }
             )
         },
         async addTodo() {
@@ -98,6 +102,10 @@ export default {
                     console.log(response.data);
                     this.refreshData();
                 }
+            ).catch(
+                (error) => {
+                    console.log(error)
+                }
             )
         },
         async removeTodo(id) {
@@ -108,6 +116,10 @@ export default {
                         const index = this.todos.findIndex((item) => item.ToDoId == id)
                         this.todos.splice(index, 1)
                     }
+                ).catch(
+                    (error) => {
+                        console.log(error)
+                    }
                 )
         },
         async checkChanged(id, isComplete) {
@@ -117,6 +129,10 @@ export default {
             }).then(
                 (response) => {
                     console.log(response.data)
+                }
+            ).catch(
+                (error) => {
+                    console.log(error)
                 }
             )
         }
@@ -148,49 +164,7 @@ export default {
     }
 }
 
-.todo-item {
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-    animation-duration: 0.3s;
-}
-
-.todo-item-right {
-    display: flex;
-    align-items: center;
-}
-
-.deadline {
-    font-size: small;
-    font-style: italic;
-}
-
-.remove-item {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-
-    &:hover {
-        color: black;
-    }
-}
-
-.todo-item-left {
-    display: flex;
-    align-items: center;
-}
-
-.todo-item-label {
-    padding: 10px;
-    margin-left: 12px;
-    max-width: 400px;
-    word-wrap: break-word;
-}
-
-.extra-container {
+.section-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -207,6 +181,15 @@ export default {
     padding-top: 14px;
     margin-bottom: 14px;
     margin: auto;
+}
+
+.todo-item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    animation-duration: 0.3s;
 }
 
 .add-button-container {

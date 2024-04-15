@@ -2,8 +2,10 @@
     <div class="todo-item">
         <div class="todo-item-left">
             <input type="checkbox" @change="updateCheck(this.todo.ToDoId, this.todo.IsComplete)" v-model="this.todo.IsComplete">
-            <div v-if="this.todo.Note == null" class="todo-item-label">{{  this.todo.Title }}</div>
-            <div v-else class="todo-item-label">{{ this.todo.Title }} - {{  this.todo.Note }}</div>
+            <div class="todo-item-text">
+                <div class="todo-item-label">{{ this.todo.Title }}</div>
+                <div v-if="this.todo.Note != null" class="todo-note-label">- {{ this.todo.Note }}</div>
+            </div>
         </div>
         <div class="todo-item-right">
             <div class="deadline">
@@ -40,3 +42,38 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.todo-item-right {
+    display: flex;
+    align-items: center;
+}
+
+.deadline {
+    font-size: small;
+    font-style: italic;
+    margin-right: 10px;
+}
+
+.todo-item-left {
+    display: flex;
+    align-items: center;
+}
+
+.todo-item-label {
+    padding: 10px;
+    margin-left: 12px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+.todo-note-label {
+    font-size: 16px;
+    padding: 2px 5px 5px 5px;
+    margin-left: 20px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+</style>
