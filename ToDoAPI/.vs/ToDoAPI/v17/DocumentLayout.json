@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|c:\\users\\fhickey93\\dev\\todolistp1\\todoapi\\models\\post models\\updateiscomplete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|solutionrelative:models\\post models\\updateiscomplete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|c:\\users\\fhickey93\\dev\\todolistp1\\todoapi\\models\\todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|solutionrelative:models\\todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|c:\\users\\fhickey93\\dev\\todolistp1\\todoapi\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|solutionrelative:services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|c:\\users\\fhickey93\\dev\\todolistp1\\todoapi\\controllers\\todocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D351D65-9C11-4E29-9D20-DF0CE8CB37E3}|ToDoAPI.csproj|solutionrelative:controllers\\todocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UpdateIsComplete.cs",
+              "DocumentMoniker": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Models\\POST Models\\UpdateIsComplete.cs",
+              "RelativeDocumentMoniker": "Models\\POST Models\\UpdateIsComplete.cs",
+              "ToolTip": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Models\\POST Models\\UpdateIsComplete.cs",
+              "RelativeToolTip": "Models\\POST Models\\UpdateIsComplete.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T14:34:43.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ToDoItem.cs",
+              "DocumentMoniker": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Models\\ToDoItem.cs",
+              "RelativeDocumentMoniker": "Models\\ToDoItem.cs",
+              "ToolTip": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Models\\ToDoItem.cs",
+              "RelativeToolTip": "Models\\ToDoItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T18:43:41.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ToDoService.cs",
+              "DocumentMoniker": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Services\\ToDoService.cs",
+              "RelativeDocumentMoniker": "Services\\ToDoService.cs",
+              "ToolTip": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Services\\ToDoService.cs",
+              "RelativeToolTip": "Services\\ToDoService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T18:34:23.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ToDoController.cs",
+              "DocumentMoniker": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Controllers\\ToDoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ToDoController.cs",
+              "ToolTip": "C:\\Users\\fhickey93\\Dev\\ToDoListP1\\ToDoAPI\\Controllers\\ToDoController.cs",
+              "RelativeToolTip": "Controllers\\ToDoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T18:28:00.271Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
