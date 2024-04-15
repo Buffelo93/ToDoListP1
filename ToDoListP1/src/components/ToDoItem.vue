@@ -3,8 +3,8 @@
         <div class="todo-item-left">
             <input type="checkbox" @change="updateCheck(this.todo.ToDoId, this.todo.IsComplete)" v-model="this.todo.IsComplete">
             <div class="todo-item-text">
-                <div class="todo-item-label">{{ this.todo.Title }}</div>
-                <div v-if="this.todo.Note != null" class="todo-note-label">- {{ this.todo.Note }}</div>
+                <div class="todo-item-label" :class="{ isComplete: this.todo.IsComplete }">{{ this.todo.Title }}</div>
+                <div v-if="this.todo.Note != null" class="todo-note-label" :class="{ isComplete: this.todo.IsComplete }">- {{ this.todo.Note }}</div>
             </div>
         </div>
         <div class="todo-item-right">
@@ -74,6 +74,11 @@ export default {
     margin-left: 20px;
     max-width: 400px;
     word-wrap: break-word;
+}
+
+.isComplete {
+    text-decoration: line-through;
+    color: gray;
 }
 
 </style>
