@@ -11,7 +11,7 @@ namespace ToDoAPI.ToDoDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = tcp:fofotodoappserver.database.windows.net, 1433; Initial Catalog = ToDoAppDB; Persist Security Info = False; User ID = ToDoAppAdmin; Password = Harper062024$; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            optionsBuilder.UseSqlServer("Server = tcp:fofotodoappserver.database.windows.net, 1433; Initial Catalog = ToDoAppDB; Persist Security Info = False; User ID = ToDoAppAdmin; Password = {password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
